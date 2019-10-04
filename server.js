@@ -6,6 +6,7 @@ const cors = require('cors');
 const Datastore = require('nedb');
 const cron = require('node-cron');
 const Pusher = require('pusher');
+const fetch = require('node-fetch');
 
 const authorizeSpotify = require('./authorizeSpotify');
 const getAccessToken = require('./getAccessToken');
@@ -22,6 +23,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 app.get('/login', authorizeSpotify);
 app.get('/callback', getAccessToken, (req, res, next) =>{
   db.insert(req.credentials, err => {
@@ -34,6 +36,9 @@ app.get('/callback', getAccessToken, (req, res, next) =>{
   });
 });
 
+function test(name){
+  return name;
+}
 app.get('/history', (req, res) => {
   db.find({}, (err, docs) => {
     if (err) {
@@ -46,11 +51,11 @@ app.get('/history', (req, res) => {
         const arr = data.map(e => ({
           artist_name: e.name,
           artist_picture: e.images[0].url,
-          artist_id: Songkick(e.name), 
+          artist_id: 0
         }));
-
         res.json(arr);
       })
+      .then(res => console.log(res))
       .catch(err => console.log(err));
     });
   });

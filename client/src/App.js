@@ -45,7 +45,7 @@ class App extends Component {
       <tr key={item.artist}>
         <img src={item.artist_picture} alt={item.artist_name} height="100" width="100"/>
         <td>{item.artist_name}</td>
-        <td>{item.artist_location}</td>
+        <td>{item.artist_id}</td>
         <td>{index + 1}</td>
       </tr>
     );

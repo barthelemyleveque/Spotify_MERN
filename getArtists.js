@@ -15,5 +15,15 @@ const getArtists = accessToken => {
     .then(data => data.items)
     .catch(error => console.log(error));
 };
-
+/*
+fetch('https://api.songkick.com/api/3.0/search/artists.json?apikey=n6cSsSbFXJEMvfAd&query='+e.name)
+          .then((res) => {
+            if (res.ok) {
+              data_artist => artist_id = data_artist.resultsPage.results.artist[0].id
+              return res.json();
+            }
+            else {
+              console.log('somethign went wrong');
+            }
+*/
 module.exports = getArtists;
