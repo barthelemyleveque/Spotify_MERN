@@ -19,6 +19,7 @@ class App extends Component {
 
     if (isUserAuthorized) {
       fetch('http://localhost:5000/history')
+        .then(res => console.log(res))
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -34,18 +35,19 @@ class App extends Component {
     const link = isUserAuthorized ? 'http://localhost:3000/?authorized=true' : 'http://localhost:3000/';
     const connectSpotify = isUserAuthorized ? ('') : (
       <div>
-    <p class="lead">Bartify vous permet d'être alerté lorsque vos artistes préférés et vos coups de coeur du moment passent en concert près de chez vous.</p>
+    <p className="lead">Bartify vous permet d'être alerté lorsque vos artistes préférés et vos coups de coeur du moment passent en concert près de chez vous.</p>
     <a href="http://localhost:5000/login" className="btn btn-success">Connect to your Spotify account</a></div>);
     const disconnectSpotify = isUserAuthorized ? 
     (<form action="http://localhost:3000">
       <input type="submit" className="btn btn-danger" value="Disconnect from Bartify" />
     </form>) : ('');
+  
 
     const TableItem = (item, index) => (
       <tr key={item.artist}>
-        <img src={item.artist_picture} alt={item.artist_name} height="100" width="100"/>
+        <td><img src={item.artist_picture} alt={item.artist_name} height="100" width="100"/>  </td>
         <td>{item.artist_name}</td>
-        <td>{item.artist_id}</td>
+        <td>5</td>
         <td>{index + 1}</td>
       </tr>
     );
@@ -78,8 +80,8 @@ class App extends Component {
     );
 
     const Footer = (
-        <footer class="page-footer font-small black">
-            <div class="footer-copyright text-center py-3">Powered by Spotify and Songkick</div>
+        <footer className="page-footer font-small black">
+            <div className="footer-copyright text-center py-3">Powered by Spotify and Songkick</div>
         </footer>
     );
 
@@ -89,7 +91,7 @@ class App extends Component {
         {Navbar}
           <div className="jumbotron">
             {connectSpotify}
-            {musicHistory.length !== 0 ? <RecentlyPlayed /> : null}
+            {isUserAuthorized ? <RecentlyPlayed /> : null}
            {disconnectSpotify}
           </div>
           {Footer}

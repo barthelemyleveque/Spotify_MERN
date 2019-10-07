@@ -35,10 +35,8 @@ app.get('/callback', getAccessToken, (req, res, next) =>{
     }
   });
 });
+const url = 'https://api.songkick.com/api/3.0/search/artists.json?apikey=n6cSsSbFXJEMvfAd&query=';
 
-function test(name){
-  return name;
-}
 app.get('/history', (req, res) => {
   db.find({}, (err, docs) => {
     if (err) {
@@ -48,17 +46,26 @@ app.get('/history', (req, res) => {
     const accessToken = docs[0].access_token;
     getArtists(accessToken)
       .then(data => {
-        const arr = data.map(e => ({
-          artist_name: e.name,
-          artist_picture: e.images[0].url,
-          artist_id: 0
-        }));
-        res.json(arr);
+        const arr = Promise.all(
+          data.map(
+            e => fetch(url + e.name)
+              .then(res => res.json())
+              .then(data => (
+               {
+                artist_name: e.name,
+                artist_picture: e.images[0].url,
+                concerts:data.resultsPage.results.artist[0].id,
+              }))
+              .catch(error => console.log(error))
+          )
+        ).then(arr => {
+          console.log(arr);
+        });
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    });
+      .catch(err => console.log(err))
+    })
   });
+           
 
 app.set('port', process.env.PORT || 5000);
 const server = app.listen(app.get('port'), () => {
