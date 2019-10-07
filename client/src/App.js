@@ -14,19 +14,18 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { isUserAuthorized } = this.state;
 
+    async function getData()
+    {
+      let response = await fetch('http://localhost:5000/history')
+      return await response.json()
+    }
     if (isUserAuthorized) {
-      fetch('http://localhost:5000/history')
-        .then(res => console.log(res))
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            musicHistory: data,
-          });
-        })
-        .catch(error => console.log(error));
+      console.log(this.setState({
+        musicHistory: await getData(),
+      }))
     }
   }
 

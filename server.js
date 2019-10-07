@@ -54,7 +54,7 @@ app.get('/history', (req, res) => {
                {
                 artist_name: e.name,
                 artist_picture: e.images[0].url,
-                concerts:data.resultsPage.results.artist[0].id,
+                concerts: data.resultsPage.results.artist[0].id || 0,
               }))
               .catch(error => console.log(error))
           )
