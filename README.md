@@ -20,17 +20,17 @@ cd client && npm start
 
 Then open your favorite browser and go to localhost:3000/
 
-[Landing](https://i.ibb.co/0BF5WrY/Screen-Shot-2019-10-28-at-10-31-45-AM.png)
+![Landing](https://i.ibb.co/0BF5WrY/Screen-Shot-2019-10-28-at-10-31-45-AM.png)
 
 ## The Spotify API
 
 First, you have to authentificate through Spotify's API, from which I will get a token allowing me to access your songs history.
 
-[Spotify API](https://i.ibb.co/441hS94/Screen-Shot-2019-10-28-at-10-32-01-AM.png)
+![Spotify API](https://i.ibb.co/441hS94/Screen-Shot-2019-10-28-at-10-32-01-AM.png)
 
 ## Fetching the user Top 50 Artists
 
-[User Page](https://i.ibb.co/f4Gf7xJ/Screen-Shot-2019-10-28-at-10-32-20-AM.png)
+![User Page](https://i.ibb.co/f4Gf7xJ/Screen-Shot-2019-10-28-at-10-32-20-AM.png)
 
 Now I have to reconcile the user's location, and its favorite artists venues.
 
