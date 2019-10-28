@@ -53,6 +53,9 @@ app.get('/history', (req, res) => {
     });
   });
 ```
+
+(artist_id is initialized at 0, to latter be changed by the Songkick' Artist's ID)
+
 ![User Page](https://i.ibb.co/f4Gf7xJ/Screen-Shot-2019-10-28-at-10-32-20-AM.png)
 
 Now I have to reconcile the user's location, and its favorite artists venues.
